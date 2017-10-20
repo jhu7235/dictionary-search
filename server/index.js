@@ -1,9 +1,6 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const createRadixTree = require('../utility/createRadixTree');
-
-createRadixTree(path);
 
 const port = process.env.PORT || 1992;
 

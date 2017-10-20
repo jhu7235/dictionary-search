@@ -110,6 +110,11 @@ class Simulation extends React.Component{
 					ref={node => this.node = node}
 					>
 				</svg>
+				<div id='search-feild'>
+				<input
+					type='text'
+					/>
+				</div>
 			</div>
 		)
 	}

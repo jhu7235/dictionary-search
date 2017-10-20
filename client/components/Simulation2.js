@@ -7,7 +7,6 @@ class Simulation2 extends React.Component{
 	constructor() {
 		super();
 		this.createTree = this.createTree.bind(this);
-		this.currentNode = {}
 	}
 
 	componentDidMount() {
@@ -21,7 +20,7 @@ class Simulation2 extends React.Component{
 	createTree() {
 		var margin = {top: 20, right: 120, bottom: 20, left: 120},
 		    width = 960 - margin.right - margin.left,
-		    height = 800 - margin.top - margin.bottom;
+		    height = 700 - margin.top - margin.bottom;
 
 		var i = 0,
 		    duration = 750,
@@ -36,27 +35,71 @@ class Simulation2 extends React.Component{
 		var svg = d3.select("#simulation").append("svg")
 		    .attr("width", width + margin.right + margin.left)
 		    .attr("height", height + margin.top + margin.bottom)
-		  .append("g")
+		    .attr('viewBox', '0 0 960 700')
+		    .attr('preserveAspectRatio', 'xMidYMid meet')
+			  .append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		d3.json("flare.json", function(error, flare) {
-		  if (error) throw error;
+		var aspect = width/height;
 
-		  root = flare;
-		  root.x0 = height / 2;
-		  root.y0 = 0;
-
-		  function collapse(d) {
-		    if (d.children) {
-		      d._children = d.children;
-		      d._children.forEach(collapse);
-		      d.children = null;
-		    }
-		  }
-
-		  root.children.forEach(collapse);
-		  update(root);
+		d3.select(window).on('resize', () => {
+	    var targetWidth = svg[0][0].parentNode.parentNode.clientWidth;
+	    svg.attr("width", targetWidth);
+	    svg.attr("height", targetWidth / aspect);
+	    console.log('new width and height', targetWidth);
 		});
+
+		// d3.json("flare.json", function(error, flare) {
+		//   if (error) throw error;
+		//   // console.log(JSON.stringify(flare));
+		//   root = flare;
+		//   root.x0 = height / 2;
+		//   root.y0 = 0;
+
+		//   function collapse(d) {
+		//     if (d.children) {
+		//       d._children = d.children;
+		//       d._children.forEach(collapse);
+		//       d.children = null;
+		//     }
+		//   }
+
+		//   root.children.forEach(collapse);
+		//   console.log(root);
+		//   update(root);
+		// });
+
+		function loadTree() {
+			let dictionary = this.props.dictionary;
+			console.log(dictionary)
+			// 	root = {};
+			// root.children = [];
+			// for(let child in dictionary.children) {
+			// 	root.children.push(dictionary.children[child]);
+			// }
+			// root.name = ''
+			// root.x0 = height / 2;
+			// root.y0 = 0;
+
+		 //  function collapse(d) {
+		 //    if (d.children) {
+		 //    	d.name = d.value;
+		 //    	d._children = []
+		 //    	for(let child in d.children) {
+		 //    		d._children.push(d.children[child])
+		 //    	}
+		 //      d._children.forEach(collapse);
+		 //      d.children = null;
+		 //    }
+		 //  }
+
+		 //  for( let child in root.children) {
+		 //  	collapse(root.children[child])
+		 //  }
+		 //  console.log(root)
+		 //  update(root);
+		}
+		loadTree.call(this);
 
 		d3.select(self.frameElement).style("height", "800px");
 
@@ -171,7 +214,7 @@ class Simulation2 extends React.Component{
 const mapDispatch = dispatch => ({})
 
 const mapState = state => ({
-	currentNode: state.dictionary,
+	dictionary: state.dictionary,
 })
 
 export default connect(mapState, mapDispatch)(Simulation2);

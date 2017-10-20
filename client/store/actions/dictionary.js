@@ -1,4 +1,5 @@
 import axios from 'axios';
+import createRadixTree from '../../utility/createRadixTree'
 
 /**
  * ACTION TYPES
@@ -54,15 +55,13 @@ export const getDictionaryTC = () => (dispatch) => {
   console.log('getDictionaryTC')
   return axios.get('/dictionary.json')
     .then(res => {
-      console.log(res.data)
-      res.data
+      return res.data
     })
     .then((dictionary) => {
-      if (dictionary) dispatch(getDictionary({dictionary})); //testing
+      if (dictionary) dispatch(getDictionary(createRadixTree(dictionary))); //testing
       else dispatch(getDictionary({}));
     })
     .catch(err => dispatch(getDictionary({})))
-      // console.error('getting dictionary unsucessful', err));
 };
 
 // export const createItem = itemObj => (dispatch) => {

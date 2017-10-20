@@ -1,0 +1,65 @@
+/*#main {
+  background-color: 'red'; }
+
+.node {
+  stroke: #fff;
+  stroke-width: 2px; }
+
+.link {
+  fill: none;
+  stroke: #000; }
+
+*/
+
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+#simulation {
+  background-color: blue;
+}
+
+#search-container {
+  display: flex;
+}
+
+div.input-field {
+  margin: auto;
+}
+
+#search {
+  display: inline;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#search:focus { 
+  background-color: white;
+  opacity: .5;
+}
+
+.nav-commands > * {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#simulation {
+  width: 100%;
+}

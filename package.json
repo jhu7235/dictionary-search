@@ -7,7 +7,7 @@
     "client": "webpack -d --watch",
     "build": "webpack -p",
     "build-css": "node-sass -w client/stylesheets/index.scss -o public/stylesheets",
-    "start": "node server/index.js",
+    "start": "nodemon server/index.js",
     "test": "jest --watch"
   },
   "repository": {
@@ -30,8 +30,6 @@
     "bluebird": "^3.5.1",
     "d3": "^4.11.0",
     "express": "^4.16.2",
-    "fs": "0.0.1-security",
-    "jsonfile": "^4.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-materialize": "^1.0.15",
